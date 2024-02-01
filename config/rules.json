@@ -1,0 +1,52 @@
+{
+  "rules": [
+    {
+      "conditions": [
+        {
+          "field": "From",
+          "predicate": "contains",
+          "value": "tenmiles.com"
+        },
+        {
+          "field": "Subject",
+          "predicate": "contains",
+          "value": "Interview"
+        },
+        {
+          "field": "Date",
+          "predicate": "less than",
+          "value": 2
+        }
+      ],
+      "overall_predicate": "All",
+      "actions": {
+        "mark_as": "UNREAD",
+        "move_to": "STARRED"
+      }
+    },
+    {
+      "conditions": [
+        {
+          "field": "From",
+          "predicate": "not contains",
+          "value": "SK"
+        },
+        {
+          "field": "Subject",
+          "predicate": "not contains",
+          "value": "Test"
+        },
+        {
+          "field": "Date",
+          "predicate": "greater than",
+          "value": 3
+        }
+      ],
+      "overall_predicate": "Any",
+      "actions": {
+        "mark_as": "READ",
+        "move_to": "SPAM"
+      }
+    }
+  ]
+}
