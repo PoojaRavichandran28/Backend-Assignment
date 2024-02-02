@@ -23,8 +23,8 @@ https://developers.google.com/gmail/api/quickstart/python
    pip install -r requirements.txt
 7. Add the credentials.json file to backend_assignment
 8. For installing postgres database follow the steps in the below links
-   https://www.w3schools.com/postgresql/postgresql_install.php
-   https://www.w3schools.com/postgresql/postgresql_getstarted.php
+    https://www.w3schools.com/postgresql/postgresql_install.php
+    https://www.w3schools.com/postgresql/postgresql_getstarted.php
 
 ### 3. Run Project
 To run the project execute below command in your virtual environment
