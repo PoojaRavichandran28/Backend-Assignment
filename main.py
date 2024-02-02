@@ -14,7 +14,7 @@ from rule_execution import execute_rules
 CLIENT_SECRET_FILE = 'credentials.json'
 API_NAME = 'gmail'
 API_VERSION = 'v1'
-SCOPES = ["https://mail.google.com/"]
+SCOPES = ["https://www.googleapis.com/auth/gmail.modify"]
 
 STRF_FORMAT = "%Y-%m-%d %H:%M:%S"
 
