@@ -20,6 +20,12 @@ STRF_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 
 def get_gmail_service():
+  '''
+  Checks if token.json file exists. If file exists, get the credentials and establish connection with gmail api.
+  If token.json file does not exists, asks for signing into gmail account and then creates oke.json file.
+  If token.json file expires, error will be raised.
+  :return:  service object to interact with gmail api endpoints
+  '''
   creds = None
 
   if os.path.exists('token.json'):
@@ -41,6 +47,13 @@ def get_gmail_service():
 
 
 def fetch_mails(service):
+  '''
+  This function connects with gmail api's /messages/ endpoint and fetches the mails from the INBOX folder.
+  The required data alone is formatted and returned as a list of dictionaries
+  :param service: object
+  :return formatted_data: [{'message_id': String, 'message': String, 'labels': List,
+  'From': String, 'To': String, 'Subject: String', 'Date': String},......]
+  '''
   try:
     results = service.users().messages().list(userId="me", labelIds='INBOX').execute()
     messages = results.get('messages', [])
@@ -68,6 +81,14 @@ def fetch_mails(service):
 
 
 def store_to_db(formatted_data):
+  '''
+  Establishes connection with the database.
+  Creates the database if it doesn't exist earlier.
+  Creates the table name if it doesn't exist earlier.
+  Inserts the formatted data into the email_data table
+  :param formatted_data: list of dictionaries
+  :return: 1 if success else error message
+  '''
   try:
     create_database_if_not_exists()
     create_email_data_table()
@@ -80,6 +101,12 @@ def store_to_db(formatted_data):
 
 
 def main():
+  '''
+  Step 1: Establishes connection with gmail api
+  Step 2: Using gmail api, fetches mails for Inbox and format the required data
+  Step 3: Stores the formatted data to email_data table
+  Step 4: Executes the rules and mark the mail as Read/Unread and move them to the specified folder
+  '''
   service = get_gmail_service()
   formatted_data = fetch_mails(service)
   store_to_db(formatted_data)
